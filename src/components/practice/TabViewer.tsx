@@ -20,13 +20,17 @@ const BEAT_W = (MEASURE_W - PAD_L * 2) / BEATS; // px per beat slot
 // Authentic tab notation label order (high e on top, low E on bottom)
 const STRING_LABELS = ["e", "B", "G", "D", "A", "E"];
 
+// Note colors use Songsterr tokens:
+// unplayed: tab-note-base-dark #ddd on transparent — we show subtle bg
+// correct/wrong etc are our own since Songsterr doesn't have a practice mode
 const NOTE_STYLE: Record<NoteStatus, { bg: string; text: string; ring: string }> = {
-  correct:    { bg: "#064e3b", text: "#34d399", ring: "#059669" },
-  early:      { bg: "#422006", text: "#fbbf24", ring: "#d97706" },
-  late:       { bg: "#431407", text: "#fb923c", ring: "#ea580c" },
-  missed:     { bg: "#450a0a", text: "#f87171", ring: "#dc2626" },
-  wrong_note: { bg: "#2e1065", text: "#c4b5fd", ring: "#7c3aed" },
-  unplayed:   { bg: "#27272a", text: "#a1a1aa", ring: "#3f3f46" },
+  correct:    { bg: "#0a2e14", text: "#238c35", ring: "#18b320" },
+  early:      { bg: "#2e2005", text: "#d79f36", ring: "#d88f06" },
+  late:       { bg: "#2e1205", text: "#cf6a28", ring: "#ea580c" },
+  missed:     { bg: "#2e0808", text: "#cf4343", ring: "#b83b3b" },
+  wrong_note: { bg: "#1e0a2e", text: "#a06cc9", ring: "#7c3aed" },
+  // --tab-note-base-dark: #ddd, bg transparent matches real Songsterr
+  unplayed:   { bg: "transparent", text: "#dddddd", ring: "#6d6d6d" },
 };
 
 const LEGEND_ITEMS: [NoteStatus, string][] = [
@@ -139,7 +143,8 @@ export default function TabViewer({ notes, bpm, currentMeasure }: TabViewerProps
                   left: PAD_L,
                   right: 0,
                   height: 1,
-                  backgroundColor: "#303030",
+                  // --tab-strings-dark: #6d6d6d
+                  backgroundColor: "#6d6d6d",
                 }}
               />
             ))}
@@ -152,11 +157,12 @@ export default function TabViewer({ notes, bpm, currentMeasure }: TabViewerProps
                   key={`bar-${mi}`}
                   className="absolute"
                   style={{
-                    left: PAD_L + mi * MEASURE_W,
-                    top: 0,
-                    height: staffH,
-                    width: isActive ? 2 : 1,
-                    backgroundColor: isActive ? "#2563eb" : "#3a3a3a",
+                  left: PAD_L + mi * MEASURE_W,
+                  top: 0,
+                  height: staffH,
+                  width: isActive ? 2 : 1,
+                  // --tab-measure-dark: #6d6d6d
+                  backgroundColor: isActive ? "#238c35" : "#6d6d6d",
                   }}
                 />
               );

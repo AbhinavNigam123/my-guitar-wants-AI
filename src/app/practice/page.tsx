@@ -65,11 +65,13 @@ function SearchModal({ open, onClose }: { open: boolean; onClose: () => void }) 
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ type: "spring", stiffness: 400, damping: 30 }}
+            // --panel-surface-dark: #252529, --popup-shadow-dark
             className="fixed z-[101] top-20 left-1/2 -translate-x-1/2 w-full max-w-xl rounded-lg overflow-hidden"
-            style={{ backgroundColor: "#2a2a2e", border: "1px solid rgba(255,255,255,0.1)" }}
+            style={{ backgroundColor: "#252529", border: "1px solid #3b3b3f", boxShadow: "0 4px 35px 0 rgba(0,0,0,0.56)" }}
           >
             {/* Search input */}
-            <div className="flex items-center gap-3 px-4 py-3" style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+            {/* --search-background-dark: #18181b, --popup-divider-dark: #3b3b3f */}
+            <div className="flex items-center gap-3 px-4 py-3" style={{ borderBottom: "1px solid #3b3b3f", backgroundColor: "#18181b" }}>
               <Search size={18} color="#8a8b8c" />
               <input
                 autoFocus
@@ -95,16 +97,18 @@ function SearchModal({ open, onClose }: { open: boolean; onClose: () => void }) 
                 <button
                   key={song.id}
                   onClick={onClose}
-                  className="w-full flex items-center gap-4 px-4 py-3 text-left hover:opacity-70 transition-opacity"
-                  style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}
+                  className="w-full flex items-center gap-4 px-4 py-3 text-left transition-colors"
+                  style={{ borderBottom: "1px solid #3b3b3f", background: "transparent" }}
+                  onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#29292d")}
+                  onMouseLeave={e => (e.currentTarget.style.backgroundColor = "transparent")}
                 >
-                  {/* Difficulty dots */}
+                  {/* Difficulty dots — --difficulty-color-dark #525359, --difficulty-color-fill #007aff */}
                   <div className="flex gap-0.5 shrink-0">
                     {Array.from({ length: 5 }).map((_, i) => (
                       <div
                         key={i}
                         className="w-1.5 h-1.5 rounded-full"
-                        style={{ backgroundColor: i < song.difficulty ? "#238c35" : "rgba(255,255,255,0.15)" }}
+                        style={{ backgroundColor: i < song.difficulty ? "#007aff" : "#525359" }}
                       />
                     ))}
                   </div>
