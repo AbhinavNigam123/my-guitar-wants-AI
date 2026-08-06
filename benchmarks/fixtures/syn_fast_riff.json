@@ -1,0 +1,37 @@
+{
+  "generator": "fast_riff_pentatonic",
+  "sampleRate": 22050,
+  "recordingConditions": "synthetic",
+  "groundTruth": [
+    {
+      "onsetMs": 50,
+      "endMs": 190,
+      "midi": 40
+    },
+    {
+      "onsetMs": 238,
+      "endMs": 378,
+      "midi": 43
+    },
+    {
+      "onsetMs": 425,
+      "endMs": 565,
+      "midi": 45
+    },
+    {
+      "onsetMs": 612,
+      "endMs": 752,
+      "midi": 47
+    },
+    {
+      "onsetMs": 800,
+      "endMs": 940,
+      "midi": 52
+    },
+    {
+      "onsetMs": 987,
+      "endMs": 1128,
+      "midi": 55
+    }
+  ]
+}

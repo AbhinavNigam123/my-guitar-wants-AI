@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "description": "Transcription eval fixtures. Add your problem clips under fixtures/user/ and set optional:false when ready.",
+  "defaults": {
+    "bpm": 120,
+    "beatsPerMeasure": 4
+  },
+  "fixtures": [
+    {
+      "id": "synthetic_triad",
+      "path": "fixtures/synthetic_triad.wav",
+      "generate": "triad_sequence",
+      "bpm": 120,
+      "expect": {
+        "noteCountMin": 2,
+        "noteCountMax": 8,
+        "slideCountMax": 2,
+        "ghostRatioMax": 0.35
+      }
+    },
+    {
+      "id": "synthetic_strum",
+      "path": "fixtures/synthetic_strum.wav",
+      "generate": "strum_chord",
+      "bpm": 120,
+      "expect": {
+        "noteCountMin": 2,
+        "noteCountMax": 10,
+        "chordClustersMin": 1,
+        "maxFret": 16
+      }
+    },
+    {
+      "id": "user_clip_template",
+      "path": "fixtures/user/my_recording.webm",
+      "optional": true,
+      "bpm": 120,
+      "notes": "Drop your real mic recordings here; rename id and set optional:false.",
+      "expect": {
+        "noteCountMin": 1,
+        "noteCountMax": 80,
+        "maxFret": 20
+      }
+    }
+  ]
+}

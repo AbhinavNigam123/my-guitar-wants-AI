@@ -1,0 +1,37 @@
+{
+  "generator": "open_chord_em",
+  "sampleRate": 22050,
+  "recordingConditions": "synthetic",
+  "groundTruth": [
+    {
+      "onsetMs": 100,
+      "endMs": 900,
+      "midi": 40
+    },
+    {
+      "onsetMs": 100,
+      "endMs": 900,
+      "midi": 47
+    },
+    {
+      "onsetMs": 100,
+      "endMs": 900,
+      "midi": 52
+    },
+    {
+      "onsetMs": 100,
+      "endMs": 900,
+      "midi": 55
+    },
+    {
+      "onsetMs": 100,
+      "endMs": 900,
+      "midi": 59
+    },
+    {
+      "onsetMs": 100,
+      "endMs": 900,
+      "midi": 64
+    }
+  ]
+}

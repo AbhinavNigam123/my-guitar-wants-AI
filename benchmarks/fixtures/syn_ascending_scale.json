@@ -1,0 +1,37 @@
+{
+  "generator": "ascending_scale_am_penta",
+  "sampleRate": 22050,
+  "recordingConditions": "synthetic",
+  "groundTruth": [
+    {
+      "onsetMs": 50,
+      "endMs": 400,
+      "midi": 45
+    },
+    {
+      "onsetMs": 500,
+      "endMs": 850,
+      "midi": 48
+    },
+    {
+      "onsetMs": 950,
+      "endMs": 1300,
+      "midi": 50
+    },
+    {
+      "onsetMs": 1400,
+      "endMs": 1750,
+      "midi": 52
+    },
+    {
+      "onsetMs": 1850,
+      "endMs": 2200,
+      "midi": 55
+    },
+    {
+      "onsetMs": 2300,
+      "endMs": 2650,
+      "midi": 57
+    }
+  ]
+}

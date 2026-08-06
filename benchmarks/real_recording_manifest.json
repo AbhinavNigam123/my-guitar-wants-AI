@@ -1,0 +1,404 @@
+{
+  "version": 1,
+  "description": "Real-recording and annotated-synthetic transcription benchmark. Synthetic fixtures (syn_*) are always generated deterministically. Real fixtures (real_*) are optional until a recording + annotation JSON are placed in fixtures/real/. See benchmarks/RECORDING_PROTOCOL.md for how to record and annotate.",
+  "defaults": {
+    "bpm": 120,
+    "beatsPerMeasure": 4,
+    "preset": {
+      "onset": 0.40,
+      "frame": 0.28,
+      "minNoteMs": 45,
+      "minAmpRatio": 0.18,
+      "preprocess": true
+    }
+  },
+  "fixtures": [
+    {
+      "id": "syn_isolated_strings",
+      "category": "isolated_notes",
+      "path": "fixtures/syn_isolated_strings.wav",
+      "annotation": "fixtures/syn_isolated_strings.json",
+      "generate_annotated": "isolated_string_notes",
+      "bpm": 120,
+      "optional": false,
+      "description": "Open note per string E2→E4 (synthetic sine, 500ms each)",
+      "expect": {
+        "_note": "Baseline: recall=0.50, prec=0.50, ghost=0.50. Thresholds are regression guards at ~70% of observed.",
+        "minOnsetRecall": 0.35,
+        "maxGhostRate": 0.70
+      }
+    },
+    {
+      "id": "syn_repeated_note",
+      "category": "repeated_notes",
+      "path": "fixtures/syn_repeated_note.wav",
+      "annotation": "fixtures/syn_repeated_note.json",
+      "generate_annotated": "repeated_single_note",
+      "bpm": 120,
+      "optional": false,
+      "description": "E2 repeated 4 times, 400ms each with 200ms gaps",
+      "expect": {
+        "_note": "Baseline: recall=1.00, ghost=0.67 (ringing false detections). Guard recall, allow high ghost rate.",
+        "minOnsetRecall": 0.70,
+        "maxGhostRate": 0.85
+      }
+    },
+    {
+      "id": "syn_ascending_scale",
+      "category": "scales",
+      "path": "fixtures/syn_ascending_scale.wav",
+      "annotation": "fixtures/syn_ascending_scale.json",
+      "generate_annotated": "ascending_scale_am_penta",
+      "bpm": 120,
+      "optional": false,
+      "description": "A minor pentatonic ascending (A2, C3, D3, E3, G3, A3)",
+      "expect": {
+        "_note": "Baseline: recall=1.00, prec=0.75, ghost=0.25.",
+        "minOnsetRecall": 0.70,
+        "maxGhostRate": 0.50
+      }
+    },
+    {
+      "id": "syn_descending_scale",
+      "category": "scales",
+      "path": "fixtures/syn_descending_scale.wav",
+      "annotation": "fixtures/syn_descending_scale.json",
+      "generate_annotated": "descending_scale_am_penta",
+      "bpm": 120,
+      "optional": false,
+      "description": "A minor pentatonic descending (A3 → A2)",
+      "expect": {
+        "_note": "Baseline: recall=1.00, ghost=0.00. Best-performing category.",
+        "minOnsetRecall": 0.70,
+        "maxGhostRate": 0.20
+      }
+    },
+    {
+      "id": "syn_arpeggio_em",
+      "category": "arpeggios",
+      "path": "fixtures/syn_arpeggio_em.wav",
+      "annotation": "fixtures/syn_arpeggio_em.json",
+      "generate_annotated": "arpeggio_em",
+      "bpm": 120,
+      "optional": false,
+      "description": "E minor arpeggio (E2, B2, E3, G3, B3, E4)",
+      "expect": {
+        "_note": "Baseline: recall=1.00, ghost=0.14.",
+        "minOnsetRecall": 0.70,
+        "maxGhostRate": 0.40
+      }
+    },
+    {
+      "id": "syn_chord_em",
+      "category": "open_chords",
+      "path": "fixtures/syn_chord_em.wav",
+      "annotation": "fixtures/syn_chord_em.json",
+      "generate_annotated": "open_chord_em",
+      "bpm": 120,
+      "optional": false,
+      "description": "E minor open chord — all 6 strings simultaneously",
+      "expect": {
+        "_note": "Baseline: recall=0.00, ghost=1.00. Basic Pitch cannot detect any notes from summed chord sines; all detected events are harmonic artifacts. No pass threshold — this documents the known polyphonic chord detection failure.",
+        "minOnsetRecall": 0.0
+      }
+    },
+    {
+      "id": "syn_chord_f_barre",
+      "category": "barre_chords",
+      "path": "fixtures/syn_chord_f_barre.wav",
+      "annotation": "fixtures/syn_chord_f_barre.json",
+      "generate_annotated": "barre_chord_f",
+      "bpm": 120,
+      "optional": false,
+      "description": "F major barre chord (fret 1): F2, C3, F3, A3, C4, F4",
+      "expect": {
+        "_note": "Baseline: recall=0.83, prec=0.83, ghost=0.17.",
+        "minOnsetRecall": 0.55,
+        "maxGhostRate": 0.40
+      }
+    },
+    {
+      "id": "syn_fast_riff",
+      "category": "fast_riffs",
+      "path": "fixtures/syn_fast_riff.wav",
+      "annotation": "fixtures/syn_fast_riff.json",
+      "generate_annotated": "fast_riff_pentatonic",
+      "bpm": 160,
+      "optional": false,
+      "description": "E minor pentatonic run at 160 BPM (8th notes, ~187ms apart)",
+      "expect": {
+        "_note": "Baseline: recall=0.33, prec=0.50, ghost=0.50. Basic Pitch minimum note length merges fast adjacent notes.",
+        "minOnsetRecall": 0.20,
+        "maxGhostRate": 0.75
+      }
+    },
+    {
+      "id": "syn_bend_single",
+      "category": "techniques",
+      "path": "fixtures/syn_bend_single.wav",
+      "annotation": "fixtures/syn_bend_single.json",
+      "generate_annotated": "bend_single",
+      "bpm": 120,
+      "optional": false,
+      "description": "Single whole-step bend E3→F#3 (pitch ramp, 400ms)",
+      "expect": {
+        "_note": "Baseline: recall=1.00, ghost=0.50 (pitch ramp creates one extra detected event).",
+        "minOnsetRecall": 0.70,
+        "maxGhostRate": 0.75
+      }
+    },
+    {
+      "id": "syn_hammer_on",
+      "category": "techniques",
+      "path": "fixtures/syn_hammer_on.wav",
+      "annotation": "fixtures/syn_hammer_on.json",
+      "generate_annotated": "hammer_on_pair",
+      "bpm": 120,
+      "optional": false,
+      "description": "Hammer-on pair: E3 (picked 80ms) → G3 (hammered, low amp)",
+      "expect": {
+        "_note": "Baseline: recall=0.50, prec=0.50, ghost=0.50. Short picked note often not detected.",
+        "minOnsetRecall": 0.30,
+        "maxGhostRate": 0.75
+      }
+    },
+    {
+      "id": "syn_quiet_input",
+      "category": "adverse_conditions",
+      "path": "fixtures/syn_quiet_input.wav",
+      "annotation": "fixtures/syn_quiet_input.json",
+      "generate_annotated": "quiet_isolated_strings",
+      "bpm": 120,
+      "optional": false,
+      "description": "Isolated string notes at 1/10 amplitude (peak ~0.045, ~-27 dBFS)",
+      "expect": {
+        "_note": "Baseline: recall=0.50, ghost=0.50. Backend normalization successfully amplifies quiet input (same result as normal isolated strings).",
+        "minOnsetRecall": 0.35,
+        "maxGhostRate": 0.70
+      }
+    },
+    {
+      "id": "syn_noisy_input",
+      "category": "adverse_conditions",
+      "path": "fixtures/syn_noisy_input.wav",
+      "annotation": "fixtures/syn_noisy_input.json",
+      "generate_annotated": "noisy_isolated_strings",
+      "bpm": 120,
+      "optional": false,
+      "description": "Isolated string notes with Gaussian noise (std=0.025, ~15 dB SNR)",
+      "expect": {
+        "_note": "Baseline: recall=1.00, ghost=0.14. Gaussian noise does not significantly degrade Basic Pitch detection.",
+        "minOnsetRecall": 0.70,
+        "maxGhostRate": 0.40
+      }
+    },
+
+    {
+      "id": "real_iso_low_E",
+      "category": "isolated_notes",
+      "path": "fixtures/real/iso_low_E.wav",
+      "annotation": "fixtures/real/iso_low_E.json",
+      "bpm": 120,
+      "optional": true,
+      "recordingProtocol": "Open low E string (E2, MIDI 40). Record 4 clean plucks with ~0.5s gaps. Quiet room, laptop microphone, no effects, no amp modelling. Annotate each onset in iso_low_E.json with the exact ms from the WAV."
+    },
+    {
+      "id": "real_iso_A",
+      "category": "isolated_notes",
+      "path": "fixtures/real/iso_A.wav",
+      "annotation": "fixtures/real/iso_A.json",
+      "bpm": 120,
+      "optional": true,
+      "recordingProtocol": "Open A string (A2, MIDI 45). Same protocol as real_iso_low_E."
+    },
+    {
+      "id": "real_iso_D",
+      "category": "isolated_notes",
+      "path": "fixtures/real/iso_D.wav",
+      "annotation": "fixtures/real/iso_D.json",
+      "bpm": 120,
+      "optional": true,
+      "recordingProtocol": "Open D string (D3, MIDI 50). Same protocol as real_iso_low_E."
+    },
+    {
+      "id": "real_iso_G",
+      "category": "isolated_notes",
+      "path": "fixtures/real/iso_G.wav",
+      "annotation": "fixtures/real/iso_G.json",
+      "bpm": 120,
+      "optional": true,
+      "recordingProtocol": "Open G string (G3, MIDI 55). Same protocol as real_iso_low_E."
+    },
+    {
+      "id": "real_iso_B",
+      "category": "isolated_notes",
+      "path": "fixtures/real/iso_B.wav",
+      "annotation": "fixtures/real/iso_B.json",
+      "bpm": 120,
+      "optional": true,
+      "recordingProtocol": "Open B string (B3, MIDI 59). Same protocol as real_iso_low_E."
+    },
+    {
+      "id": "real_iso_high_e",
+      "category": "isolated_notes",
+      "path": "fixtures/real/iso_high_e.wav",
+      "annotation": "fixtures/real/iso_high_e.json",
+      "bpm": 120,
+      "optional": true,
+      "recordingProtocol": "Open high e string (E4, MIDI 64). Same protocol as real_iso_low_E."
+    },
+    {
+      "id": "real_scale_ascending",
+      "category": "scales",
+      "path": "fixtures/real/scale_ascending_Am.wav",
+      "annotation": "fixtures/real/scale_ascending_Am.json",
+      "bpm": 120,
+      "optional": true,
+      "recordingProtocol": "A natural minor scale ascending from A2 (fret 0 string 5) to A4. Play at a moderate tempo (~80 BPM quarter notes). Single strokes, no bends or vibrato."
+    },
+    {
+      "id": "real_scale_descending",
+      "category": "scales",
+      "path": "fixtures/real/scale_descending_Am.wav",
+      "annotation": "fixtures/real/scale_descending_Am.json",
+      "bpm": 120,
+      "optional": true,
+      "recordingProtocol": "A natural minor scale descending from A4 down to A2. Same conditions as scale_ascending."
+    },
+    {
+      "id": "real_repeated_note",
+      "category": "repeated_notes",
+      "path": "fixtures/real/repeat_single_E2.wav",
+      "annotation": "fixtures/real/repeat_single_E2.json",
+      "bpm": 120,
+      "optional": true,
+      "recordingProtocol": "Open low E string struck 4 times with ~500ms between each strike. Let each note fully decay before the next."
+    },
+    {
+      "id": "real_arpeggio_em",
+      "category": "arpeggios",
+      "path": "fixtures/real/arpeggio_Em.wav",
+      "annotation": "fixtures/real/arpeggio_Em.json",
+      "bpm": 120,
+      "optional": true,
+      "recordingProtocol": "E minor arpeggio: pluck strings 6, 5, 4, 3, 2, 1 individually in sequence from an open Em chord shape. Each string should ring (~300ms per note)."
+    },
+    {
+      "id": "real_chord_open_em",
+      "category": "open_chords",
+      "path": "fixtures/real/chord_open_Em.wav",
+      "annotation": "fixtures/real/chord_open_Em.json",
+      "bpm": 120,
+      "optional": true,
+      "recordingProtocol": "Open Em chord (all 6 strings): play 2 clean strums with ~1s between them. Strum quickly so all strings sound as simultaneously as possible."
+    },
+    {
+      "id": "real_chord_open_g",
+      "category": "open_chords",
+      "path": "fixtures/real/chord_open_G.wav",
+      "annotation": "fixtures/real/chord_open_G.json",
+      "bpm": 120,
+      "optional": true,
+      "recordingProtocol": "Open G chord: 2 strums. Standard G voicing (low G on string 6 fret 3)."
+    },
+    {
+      "id": "real_chord_barre_f",
+      "category": "barre_chords",
+      "path": "fixtures/real/chord_barre_F.wav",
+      "annotation": "fixtures/real/chord_barre_F.json",
+      "bpm": 120,
+      "optional": true,
+      "recordingProtocol": "F major barre chord at fret 1: 2 strums. Full 6-string barre voicing (F, C, F, A, C, F low to high)."
+    },
+    {
+      "id": "real_chord_barre_bm",
+      "category": "barre_chords",
+      "path": "fixtures/real/chord_barre_Bm.wav",
+      "annotation": "fixtures/real/chord_barre_Bm.json",
+      "bpm": 120,
+      "optional": true,
+      "recordingProtocol": "Bm barre chord at fret 2: 2 strums. Standard Am-shape barre on strings 2-6."
+    },
+    {
+      "id": "real_fast_riff",
+      "category": "fast_riffs",
+      "path": "fixtures/real/riff_fast_pentatonic.wav",
+      "annotation": "fixtures/real/riff_fast_pentatonic.json",
+      "bpm": 160,
+      "optional": true,
+      "recordingProtocol": "E minor pentatonic run at 160 BPM (8th notes). At least 8 notes. Use a metronome. Alternate picking preferred."
+    },
+    {
+      "id": "real_tech_bend",
+      "category": "techniques",
+      "path": "fixtures/real/tech_bend.wav",
+      "annotation": "fixtures/real/tech_bend.json",
+      "bpm": 120,
+      "optional": true,
+      "recordingProtocol": "Whole-step bend on string 2 (B string): bend from fret 7 (F#4, MIDI 66) up to fret 9 pitch (G#4, MIDI 68). Play 3 separate bends with 0.5s between. Hold each bend at the top for ~300ms."
+    },
+    {
+      "id": "real_tech_slide",
+      "category": "techniques",
+      "path": "fixtures/real/tech_slide.wav",
+      "annotation": "fixtures/real/tech_slide.json",
+      "bpm": 120,
+      "optional": true,
+      "recordingProtocol": "Slide on string 1 (high e): from fret 5 (A4, MIDI 69) slide to fret 7 (B4, MIDI 71). Play 3 slides. Keep pick in contact with string throughout."
+    },
+    {
+      "id": "real_tech_hammer",
+      "category": "techniques",
+      "path": "fixtures/real/tech_hammer.wav",
+      "annotation": "fixtures/real/tech_hammer.json",
+      "bpm": 120,
+      "optional": true,
+      "recordingProtocol": "Hammer-on on string 2: pick fret 5 (E4, MIDI 64), hammer onto fret 7 (F#4, MIDI 66). Play 4 pairs with ~0.5s between. The hammered note should be clearly audible."
+    },
+    {
+      "id": "real_tech_pulloff",
+      "category": "techniques",
+      "path": "fixtures/real/tech_pulloff.wav",
+      "annotation": "fixtures/real/tech_pulloff.json",
+      "bpm": 120,
+      "optional": true,
+      "recordingProtocol": "Pull-off on string 1: fret both fret 7 (B4, MIDI 71) and fret 5 (A4, MIDI 69), pick fret 7, pull off to fret 5. Play 4 pairs. Both notes must be audible."
+    },
+    {
+      "id": "real_tech_vibrato",
+      "category": "techniques",
+      "path": "fixtures/real/tech_vibrato.wav",
+      "annotation": "fixtures/real/tech_vibrato.json",
+      "bpm": 120,
+      "optional": true,
+      "recordingProtocol": "Vibrato on string 1, fret 7 (B4, MIDI 71): sustain the note for 1s while applying consistent vibrato (at least 4 oscillations). Play 3 separate notes with vibrato."
+    },
+    {
+      "id": "real_tech_palmmute",
+      "category": "techniques",
+      "path": "fixtures/real/tech_palmmute.wav",
+      "annotation": "fixtures/real/tech_palmmute.json",
+      "bpm": 120,
+      "optional": true,
+      "recordingProtocol": "Palm-muted power chord on strings 5-6 (A2/E2): play 4 muted strikes at 120 BPM quarter notes. Note onset should still be clearly detectable despite short sustain."
+    },
+    {
+      "id": "real_quiet_input",
+      "category": "adverse_conditions",
+      "path": "fixtures/real/quiet_input.wav",
+      "annotation": "fixtures/real/quiet_input.json",
+      "bpm": 120,
+      "optional": true,
+      "recordingProtocol": "Isolated string notes (same as real_iso_low_E) but played softly (fingerpicking or very light pick attack). Target recording peak < 0.1 (-20 dBFS) before any normalization. Tests the backend gain boost."
+    },
+    {
+      "id": "real_noisy_room",
+      "category": "adverse_conditions",
+      "path": "fixtures/real/noisy_room.wav",
+      "annotation": "fixtures/real/noisy_room.json",
+      "bpm": 120,
+      "optional": true,
+      "recordingProtocol": "Same as real_iso_low_E but recorded with moderate background noise (fan, keyboard, or light conversation in background). Tests robustness to realistic recording conditions."
+    }
+  ]
+}

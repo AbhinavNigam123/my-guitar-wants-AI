@@ -12,6 +12,32 @@
 
 # testing
 /coverage
+/benchmarks/results/
+/benchmarks/fixtures/*.wav
+/benchmarks/fixtures/user/*
+!/benchmarks/fixtures/user/.gitkeep
+/test-results/
+debug-*.log
+
+# local scrapes / reference dumps (do not publish)
+/reference.html
+/reference.css
+/reference2.css
+/reference*.html
+/reference*.css
+
+# local agent / editor tooling
+.agents/
+.codex/
+.cursor/
+.vscode/
+scripts/mcp-diag.ps1
+
+# python
+__pycache__/
+*.py[cod]
+backend/.venv*/
+backend/**/__pycache__/
 
 # next.js
 /.next/
@@ -23,6 +49,7 @@
 # misc
 .DS_Store
 *.pem
+*.webm
 
 # debug
 npm-debug.log*

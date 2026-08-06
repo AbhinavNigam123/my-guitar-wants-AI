@@ -1,0 +1,13 @@
+# Optional dependencies for the GAPS benchmark experiment only.
+# NOT required for production transcription (Basic Pitch / ONNX).
+#
+# Install into the backend venv:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+#   pip install -r benchmarks/requirements-gaps.txt
+#
+# Run comparison:
+#   npm run harness:gaps
+
+torch>=1.9
+huggingface-hub>=0.16
+git+https://github.com/xavriley/hf_midi_transcription.git

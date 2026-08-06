@@ -1,0 +1,3 @@
+# Benchmark-only decoder for MediaRecorder WebM/Opus fixtures.
+# PyAV wheels bundle the required FFmpeg libraries on supported platforms.
+av==18.0.0

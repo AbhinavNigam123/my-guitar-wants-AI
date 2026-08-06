@@ -1,0 +1,17 @@
+{
+  "generator": "hammer_on_pair",
+  "sampleRate": 22050,
+  "recordingConditions": "synthetic",
+  "groundTruth": [
+    {
+      "onsetMs": 100,
+      "endMs": 180,
+      "midi": 52
+    },
+    {
+      "onsetMs": 190,
+      "endMs": 540,
+      "midi": 55
+    }
+  ]
+}

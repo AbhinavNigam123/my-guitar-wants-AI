@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Guitar Practice Coach
 
-## Getting Started
+Record yourself playing a tab, get note-by-note feedback, and practice with a responsive tab player.
 
-First, run the development server:
+This is an independent open-source project: a Next.js practice studio plus a FastAPI transcription service. The UI is inspired by popular online tab players; it is **not affiliated with** Songsterr, Guitar Pro, or any other commercial product.
+
+## Features
+
+- **Tab practice studio** — SVG tab viewer with playback, speed control, measure looping, and dark/light themes
+- **AI Coach** — aligns your take to the expected tab, scores pitch/timing, and surfaces concrete findings (early, late, missed, wrong note)
+- **Audio transcription** — mic or file upload → guitar tab notes via [Basic Pitch](https://github.com/spotify/basic-pitch) (ONNX)
+- **Technique hints** — bends, hammers, slides, and related cues from the transcription pipeline
+- **Harnesses** — regression suites for coach alignment and transcription quality (`npm run harness:*`)
+
+## Stack
+
+| Layer | Tech |
+|-------|------|
+| Frontend | Next.js 16, React 19, TypeScript, Tailwind CSS |
+| Playback / theory | Web Audio synth scheduling, tonal helpers |
+| Backend | FastAPI, Basic Pitch (ONNX), librosa, NumPy |
+| State | Zustand |
+
+## Quick start
+
+### Frontend
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) and go to the practice page.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Transcription backend
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Requires **Python 3.11** (Basic Pitch does not install cleanly on newer Pythons).
 
-## Learn More
+```powershell
+cd backend
+py -3.11 -m venv .venv311
+.\.venv311\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv311\Scripts\python.exe -m uvicorn app.main:app --reload --port 8000
+```
 
-To learn more about Next.js, take a look at the following resources:
+Optional: set `NEXT_PUBLIC_TRANSCRIBE_API` if the API is not at `http://localhost:8000`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+See [backend/README.md](backend/README.md) for endpoint details.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project layout
 
-## Deploy on Vercel
+```
+src/                  Next.js app (practice studio, coach UI, tab viewer)
+backend/app/          FastAPI transcription service
+benchmarks/           Coach + transcription harnesses and fixtures
+docs/                 Technical notes (model feasibility, etc.)
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Scripts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Command | Purpose |
+|---------|---------|
+| `npm run dev` | Frontend dev server |
+| `npm run build` | Type-check + production build |
+| `npm run harness:coach` | Coach alignment unit harness |
+| `npm run harness:fast` | Fast transcription unit tests |
+| `npm run harness` | Fuller transcription harness |
+
+## License / affiliation
+
+Personal / educational project. Not affiliated with, endorsed by, or connected to Songsterr, Arobas Music, Spotify, or any employer. Songsterr is a trademark of its respective owners; any visual similarity is for learning and experimentation only.

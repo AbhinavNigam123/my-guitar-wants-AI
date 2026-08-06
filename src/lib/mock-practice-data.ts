@@ -4,6 +4,7 @@ import type {
   AlignmentResult,
   PracticeFeedback,
   PracticeMetrics,
+  SongMetrics,
 } from "@/types/music";
 
 // Smoke on the Water - main riff (simplified for demo)
@@ -66,6 +67,28 @@ export const MOCK_METRICS: PracticeMetrics = {
   weakestMeasure: 2,
   recommendedTempoBpm: 60,
   currentTempoBpm: 112,
+};
+
+export const MOCK_SONG_METRICS: SongMetrics = {
+  songTitle: "Smoke on the Water",
+  artist: "Deep Purple",
+  sessionsPlayed: 8,
+  bestAccuracy: 94,
+  avgAccuracy: 78,
+  totalPracticeMinutes: 47,
+  lastPracticed: "Jun 14, 2026",
+  measureAccuracy: [
+    { measure: 1, accuracy: 92 },
+    { measure: 2, accuracy: 61 },
+    { measure: 3, accuracy: 74 },
+    { measure: 4, accuracy: 88 },
+  ],
+  recentTakes: [
+    { date: "Jun 14, 2026", accuracy: 87, tempo: 110 },
+    { date: "Jun 13, 2026", accuracy: 73, tempo: 112 },
+    { date: "Jun 12, 2026", accuracy: 81, tempo: 100 },
+    { date: "Jun 11, 2026", accuracy: 68, tempo: 112 },
+  ],
 };
 
 export function buildMockSession(): PracticeSession {

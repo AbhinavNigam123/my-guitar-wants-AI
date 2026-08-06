@@ -1,0 +1,27 @@
+{
+  "generator": "repeated_single_note",
+  "sampleRate": 22050,
+  "recordingConditions": "synthetic",
+  "groundTruth": [
+    {
+      "onsetMs": 50,
+      "endMs": 450,
+      "midi": 40
+    },
+    {
+      "onsetMs": 650,
+      "endMs": 1050,
+      "midi": 40
+    },
+    {
+      "onsetMs": 1250,
+      "endMs": 1650,
+      "midi": 40
+    },
+    {
+      "onsetMs": 1850,
+      "endMs": 2250,
+      "midi": 40
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "generator": "quiet_isolated_strings",
+  "sampleRate": 22050,
+  "recordingConditions": "synthetic",
+  "groundTruth": [
+    {
+      "onsetMs": 100,
+      "endMs": 600,
+      "midi": 40
+    },
+    {
+      "onsetMs": 900,
+      "endMs": 1400,
+      "midi": 45
+    },
+    {
+      "onsetMs": 1700,
+      "endMs": 2200,
+      "midi": 50
+    },
+    {
+      "onsetMs": 2500,
+      "endMs": 3000,
+      "midi": 55
+    },
+    {
+      "onsetMs": 3300,
+      "endMs": 3800,
+      "midi": 59
+    },
+    {
+      "onsetMs": 4100,
+      "endMs": 4600,
+      "midi": 64
+    }
+  ]
+}

@@ -48,7 +48,52 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* Songsterr chrome tokens (light = :root, dark = .dark) */
 :root {
+  --ss-topbar-surface: #fff;
+  --ss-topbar-border: #d9d9d9;
+  --ss-topbar-item: #828c99;
+  --ss-topbar-item-hover: #4f5a66;
+  --ss-surface: #fff;
+  --ss-surface-muted: #fafafa;
+  --ss-controls-surface: #fafafa;
+  --ss-controls-btn: #f0f2f4;
+  --ss-controls-btn-hover: #e5e9ed;
+  --ss-controls-border: #c3c9cf;
+  --ss-text: #252b31;
+  --ss-text-secondary: #505b66;
+  --ss-text-title: #142536;
+  --ss-text-muted: #66727e;
+  --ss-panel: #fff;
+  --ss-panel-border: #cbd1d7;
+  --ss-search-bg: #f8f8f8;
+  --ss-popup-divider: #ebebeb;
+  --ss-tab-strings: #bfbfbf;
+  --ss-tab-measure: #a6a6a6;
+  --ss-tab-tuning: #696969;
+  --ss-tab-rhythm: #7a7a7a;
+  --ss-tab-signature: #3e3e3e;
+  --ss-tab-marker: #292c2f;
+  --ss-tab-note: #161616;
+  --ss-tab-technique: #868686;
+  --ss-accent: #3156bd;
+  --ss-accent-soft: #edf1fc;
+  --ss-accent-border: #b9c7ee;
+  --ss-success: #18752d;
+  --ss-success-soft: #e9f5ec;
+
+  /* Coach note status colors — light mode (hue-separated so Late ≠ Missed) */
+  --note-correct:       #16a34a;
+  --note-correct-band:  rgba(22,163,74,0.16);
+  --note-early:         #ca8a04;
+  --note-early-band:    rgba(202,138,4,0.16);
+  --note-late:          #0284c7;
+  --note-late-band:     rgba(2,132,199,0.16);
+  --note-missed:        #dc2626;
+  --note-missed-band:   rgba(220,38,38,0.14);
+  --note-wrong:         #9333ea;
+  --note-wrong-band:    rgba(147,51,234,0.14);
+
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -84,6 +129,50 @@
 }
 
 .dark {
+  --ss-topbar-surface: #202022;
+  --ss-topbar-border: #3c3b40;
+  --ss-topbar-item: #75787c;
+  --ss-topbar-item-hover: #adafb2;
+  --ss-surface: #1c1d1f;
+  --ss-surface-muted: #1c1d1f;
+  --ss-controls-surface: #2a2a2e;
+  --ss-controls-btn: #37373b;
+  --ss-controls-btn-hover: #46464b;
+  --ss-controls-border: #ffffff14;
+  --ss-text: #d1d1d1;
+  --ss-text-secondary: #8a8b8c;
+  --ss-text-title: #d6d6d6;
+  --ss-text-muted: #8a8b8c;
+  --ss-panel: #252529;
+  --ss-panel-border: #3b3b3f;
+  --ss-search-bg: #18181b;
+  --ss-popup-divider: #3b3b3f;
+  --ss-tab-strings: #6d6d6d;
+  --ss-tab-measure: #6d6d6d;
+  --ss-tab-tuning: #b0b0b0;
+  --ss-tab-rhythm: #c4c4c4;
+  --ss-tab-signature: #d0d0d0;
+  --ss-tab-marker: #525359;
+  --ss-tab-note: #dddddf;
+  --ss-tab-technique: #8a8b8c;
+  --ss-accent: #8da8ff;
+  --ss-accent-soft: rgba(83,118,240,0.16);
+  --ss-accent-border: rgba(141,168,255,0.38);
+  --ss-success: #4fb663;
+  --ss-success-soft: rgba(35,140,53,0.16);
+
+  /* Coach note status colors — dark mode (Late = cyan, Missed = red) */
+  --note-correct:       #3fb152;
+  --note-correct-band:  rgba(35,140,53,0.16);
+  --note-early:         #e0a93f;
+  --note-early-band:    rgba(215,159,54,0.16);
+  --note-late:          #38bdf8;
+  --note-late-band:     rgba(56,189,248,0.16);
+  --note-missed:        #df5a5a;
+  --note-missed-band:   rgba(207,67,67,0.16);
+  --note-wrong:         #b07cd6;
+  --note-wrong-band:    rgba(160,108,201,0.16);
+
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -127,4 +216,51 @@
   html {
     @apply font-sans;
   }
+}
+
+/* Studio advanced range sliders — theme-aware track (native accentColor alone stays white in dark mode) */
+input[type="range"].ss-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--ss-controls-btn);
+  outline: none;
+}
+input[type="range"].ss-range::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--ss-controls-btn);
+}
+.dark input[type="range"].ss-range,
+.dark input[type="range"].ss-range::-webkit-slider-runnable-track {
+  background: #3c3b40;
+}
+input[type="range"].ss-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  margin-top: -5px;
+  border-radius: 50%;
+  background: #5376f0;
+  border: none;
+  cursor: pointer;
+}
+input[type="range"].ss-range::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--ss-controls-btn);
+  border: none;
+}
+.dark input[type="range"].ss-range::-moz-range-track {
+  background: #3c3b40;
+}
+input[type="range"].ss-range::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #5376f0;
+  border: none;
+  cursor: pointer;
 }

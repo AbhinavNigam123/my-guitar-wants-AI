@@ -1,0 +1,12 @@
+{
+  "generator": "bend_single",
+  "sampleRate": 22050,
+  "recordingConditions": "synthetic",
+  "groundTruth": [
+    {
+      "onsetMs": 100,
+      "endMs": 500,
+      "midi": 52
+    }
+  ]
+}

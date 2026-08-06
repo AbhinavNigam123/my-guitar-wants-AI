@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "description": "Known-tab AI Coach audio fixtures, including all six guitar strings.",
+  "defaults": {
+    "bpm": 120,
+    "beatsPerMeasure": 4
+  },
+  "productionPreset": "coach_clean",
+  "sweep": [
+    { "name": "coach_default", "onset": 0.30, "frame": 0.22, "minNoteMs": 35, "minAmpRatio": 0.12, "preprocess": true },
+    { "name": "coach_sensitive", "onset": 0.24, "frame": 0.18, "minNoteMs": 30, "minAmpRatio": 0.08, "preprocess": true },
+    { "name": "coach_balanced", "onset": 0.34, "frame": 0.24, "minNoteMs": 40, "minAmpRatio": 0.14, "preprocess": true },
+    { "name": "coach_clean", "onset": 0.40, "frame": 0.28, "minNoteMs": 45, "minAmpRatio": 0.18, "preprocess": true },
+    { "name": "raw_default", "onset": 0.30, "frame": 0.22, "minNoteMs": 35, "minAmpRatio": 0.12, "preprocess": false },
+    { "name": "raw_sensitive", "onset": 0.24, "frame": 0.18, "minNoteMs": 30, "minAmpRatio": 0.08, "preprocess": false },
+    { "name": "short_note", "onset": 0.32, "frame": 0.20, "minNoteMs": 25, "minAmpRatio": 0.10, "preprocess": true },
+    { "name": "quiet_guard", "onset": 0.28, "frame": 0.24, "minNoteMs": 35, "minAmpRatio": 0.16, "preprocess": true }
+  ],
+  "fixtures": [
+    {
+      "id": "synthetic_triad_known_tab",
+      "path": "fixtures/synthetic_triad.wav",
+      "generate": "triad_sequence",
+      "bpm": 120,
+      "expectedNotes": [
+        { "id": "triad-a2", "measure": 1, "beat": 1.0, "string": 5, "fret": 0, "durationBeats": 0.9 },
+        { "id": "triad-a3", "measure": 1, "beat": 2.14, "string": 3, "fret": 2, "durationBeats": 0.9 },
+        { "id": "triad-e4", "measure": 1, "beat": 3.28, "string": 1, "fret": 0, "durationBeats": 0.9 }
+      ],
+      "expect": {
+        "minAccuracy": 55,
+        "maxMissed": 2,
+        "maxExtra": 4
+      }
+    },
+    {
+      "id": "synthetic_strum_known_tab",
+      "path": "fixtures/synthetic_strum.wav",
+      "generate": "strum_chord",
+      "bpm": 120,
+      "expectedNotes": [
+        { "id": "strum1-e2", "measure": 1, "beat": 1.0, "string": 6, "fret": 0, "durationBeats": 1.1 },
+        { "id": "strum1-g2", "measure": 1, "beat": 1.0, "string": 6, "fret": 3, "durationBeats": 1.1 },
+        { "id": "strum1-b2", "measure": 1, "beat": 1.0, "string": 5, "fret": 2, "durationBeats": 1.1 },
+        { "id": "strum2-e2", "measure": 1, "beat": 2.8, "string": 6, "fret": 0, "durationBeats": 1.1 },
+        { "id": "strum2-g2", "measure": 1, "beat": 2.8, "string": 6, "fret": 3, "durationBeats": 1.1 },
+        { "id": "strum2-b2", "measure": 1, "beat": 2.8, "string": 5, "fret": 2, "durationBeats": 1.1 }
+      ],
+      "expect": {
+        "minAccuracy": 45,
+        "maxMissed": 5,
+        "maxExtra": 6
+      }
+    },
+    {
+      "id": "stairway_synth_perfect_control",
+      "path": "fixtures/user/stairway-to-heaven-m1-20-71bpm-100pct-synth-reference.webm",
+      "normalizedPath": "results/normalized/stairway-synth.wav",
+      "role": "perfect_control",
+      "bpm": 71,
+      "beatsPerMeasure": 4,
+      "expectedNotesSource": "stairway:1-20"
+    },
+    {
+      "id": "stairway_real_human_diagnostic",
+      "path": "fixtures/user/stairway-to-heaven-m1-20-71bpm-100pct-real-take.webm",
+      "normalizedPath": "results/normalized/stairway-real.wav",
+      "role": "human_diagnostic",
+      "bpm": 71,
+      "beatsPerMeasure": 4,
+      "expectedNotesSource": "stairway:1-20"
+    }
+  ]
+}

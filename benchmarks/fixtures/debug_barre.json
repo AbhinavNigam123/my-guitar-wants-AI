@@ -1,0 +1,37 @@
+{
+  "generator": "barre_chord_f",
+  "sampleRate": 22050,
+  "recordingConditions": "synthetic",
+  "groundTruth": [
+    {
+      "onsetMs": 100,
+      "endMs": 900,
+      "midi": 41
+    },
+    {
+      "onsetMs": 100,
+      "endMs": 900,
+      "midi": 48
+    },
+    {
+      "onsetMs": 100,
+      "endMs": 900,
+      "midi": 53
+    },
+    {
+      "onsetMs": 100,
+      "endMs": 900,
+      "midi": 57
+    },
+    {
+      "onsetMs": 100,
+      "endMs": 900,
+      "midi": 60
+    },
+    {
+      "onsetMs": 100,
+      "endMs": 900,
+      "midi": 65
+    }
+  ]
+}
