@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useTheme } from "@/components/theme/ThemeProvider";
 
 // CSS values verified against reference.css and Songsterr:
@@ -182,14 +181,36 @@ export default function Header({ onSearchOpen }: HeaderProps) {
               textDecoration: "none",
             }}
           >
-            <Image
-              src="/images/songsterr.png"
-              alt="Songsterr"
-              width={80}
-              height={80}
-              style={{ objectFit: "contain" }}
-              priority
-            />
+            <span
+              aria-hidden
+              style={{
+                width: 52,
+                height: 52,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: 10,
+                backgroundColor: "var(--ss-logo-plate)",
+                border: "1px solid var(--ss-logo-plate-border)",
+              }}
+            >
+              <span
+                style={{
+                  width: 34,
+                  height: 34,
+                  display: "block",
+                  backgroundColor: "var(--ss-logo)",
+                  WebkitMaskImage: "url(/images/logo.png)",
+                  WebkitMaskRepeat: "no-repeat",
+                  WebkitMaskPosition: "center",
+                  WebkitMaskSize: "contain",
+                  maskImage: "url(/images/logo.png)",
+                  maskRepeat: "no-repeat",
+                  maskPosition: "center",
+                  maskSize: "contain",
+                }}
+              />
+            </span>
           </a>
           <div style={{ flex: 1 }} />
         </div>

@@ -12,8 +12,8 @@ export const metadata: Metadata = {
   title: "AI Guitar Practice Coach",
   description: "Practice tabs with AI note-by-note feedback",
   icons: {
-    icon: "/images/songsterr.png",
-    apple: "/images/songsterr.png",
+    icon: "/images/logo.png",
+    apple: "/images/logo.png",
   },
 };
 

@@ -81,6 +81,9 @@
   --ss-accent-border: #b9c7ee;
   --ss-success: #18752d;
   --ss-success-soft: #e9f5ec;
+  --ss-logo: #142536;
+  --ss-logo-plate: #f1f3f5;
+  --ss-logo-plate-border: #d0d5db;
 
   /* Coach note status colors — light mode (hue-separated so Late ≠ Missed) */
   --note-correct:       #16a34a;
@@ -133,6 +136,9 @@
   --ss-topbar-border: #3c3b40;
   --ss-topbar-item: #75787c;
   --ss-topbar-item-hover: #adafb2;
+  --ss-logo: #f4f5f6;
+  --ss-logo-plate: #2c2c30;
+  --ss-logo-plate-border: #5a5b61;
   --ss-surface: #1c1d1f;
   --ss-surface-muted: #1c1d1f;
   --ss-controls-surface: #2a2a2e;
